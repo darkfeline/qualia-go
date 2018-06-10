@@ -14,6 +14,19 @@
 
 // Package qualia implements the primary functionality of the qualia
 // command.
+//
+// qualia recognizes special blocks (called qualified blocks) and
+// comments or uncomments them. A qualified block looks like the
+// following:
+//
+//   # BEGIN laptop
+//   export PATH="$HOME/bin:$PATH"
+//   # END laptop
+//
+// The quality of this block is laptop. If laptop is given as a
+// quality, then qualia will make sure the contents of the block are
+// uncommented. If laptop isn't given as a quality, then qualia will
+// make sure the contents of the block are commented.
 package qualia
 
 import (
@@ -23,6 +36,8 @@ import (
 	"regexp"
 )
 
+// Qualify qualifies the lines read from the Reader with the qualities
+// and writes the lines to the Writer.
 func Qualify(q []string, r io.Reader, w io.Writer) error {
 	qm := make(map[string]bool)
 	for _, q := range q {
