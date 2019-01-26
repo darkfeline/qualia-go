@@ -62,7 +62,8 @@ func TestQualify(t *testing.T) {
 		{
 			[]string{"spam"},
 			"#BEGIN spam\n#spam\n#END spam\n",
-			"#BEGIN spam\nspam\n#END spam\n"},
+			"#BEGIN spam\nspam\n#END spam\n",
+		},
 	}
 	for _, c := range cases {
 		r := strings.NewReader(c.in)
